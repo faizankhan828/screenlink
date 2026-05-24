@@ -4,6 +4,31 @@ import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
 
+const String _webFirebaseApiKey = String.fromEnvironment(
+  'SCREENLINK_FIREBASE_WEB_API_KEY',
+  defaultValue: '',
+);
+
+const String _androidFirebaseApiKey = String.fromEnvironment(
+  'SCREENLINK_FIREBASE_ANDROID_API_KEY',
+  defaultValue: '',
+);
+
+const String _iosFirebaseApiKey = String.fromEnvironment(
+  'SCREENLINK_FIREBASE_IOS_API_KEY',
+  defaultValue: '',
+);
+
+const String _macosFirebaseApiKey = String.fromEnvironment(
+  'SCREENLINK_FIREBASE_MACOS_API_KEY',
+  defaultValue: '',
+);
+
+const String _windowsFirebaseApiKey = String.fromEnvironment(
+  'SCREENLINK_FIREBASE_WINDOWS_API_KEY',
+  defaultValue: '',
+);
+
 /// Default [FirebaseOptions] for use with your Firebase apps.
 
 class DefaultFirebaseOptions {
@@ -33,7 +58,7 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCBBqF6gdMAWQdSc7BF6v1lbSs0cZBBb9c',
+    apiKey: _webFirebaseApiKey,
     appId: '1:557179503430:web:0ff03c56eac8abf88fdb47',
     messagingSenderId: '557179503430',
     projectId: 'screenlink-f2484',
@@ -43,7 +68,7 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDUaY0JpAxftW9NMq3QWAlQyN_uHZTUgb8',
+    apiKey: _androidFirebaseApiKey,
     appId: '1:557179503430:android:6042793b4fa3f0068fdb47',
     messagingSenderId: '557179503430',
     projectId: 'screenlink-f2484',
@@ -51,7 +76,7 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBgAhk47l22xB23XjdX0_6Yb7UBRM-FOzE',
+    apiKey: _iosFirebaseApiKey,
     appId: '1:557179503430:ios:0de95a2275e99dbd8fdb47',
     messagingSenderId: '557179503430',
     projectId: 'screenlink-f2484',
@@ -60,7 +85,7 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBgAhk47l22xB23XjdX0_6Yb7UBRM-FOzE',
+    apiKey: _macosFirebaseApiKey,
     appId: '1:557179503430:ios:0de95a2275e99dbd8fdb47',
     messagingSenderId: '557179503430',
     projectId: 'screenlink-f2484',
@@ -69,7 +94,7 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyCBBqF6gdMAWQdSc7BF6v1lbSs0cZBBb9c',
+    apiKey: _windowsFirebaseApiKey,
     appId: '1:557179503430:web:1edb29ffba30652d8fdb47',
     messagingSenderId: '557179503430',
     projectId: 'screenlink-f2484',

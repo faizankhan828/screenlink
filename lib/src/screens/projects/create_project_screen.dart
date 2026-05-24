@@ -27,6 +27,62 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
   ProjectStatus _status = ProjectStatus.open;
   bool _saving = false;
 
+  Future<void> _deleteProject() async {
+    final project = widget.existingProject;
+    if (project == null) {
+      return;
+    }
+
+    final shouldDelete = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Delete project?'),
+        content: Text('This will permanently remove "${project.title}".'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: const Text('Cancel'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            style: FilledButton.styleFrom(backgroundColor: Colors.red),
+            child: const Text('Delete'),
+          ),
+        ],
+      ),
+    );
+
+    if (shouldDelete != true) {
+      return;
+    }
+
+    setState(() => _saving = true);
+    final controller = context.read<AppController>();
+    try {
+      await controller.deleteProject(project.projectId);
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Project deleted'),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      context.go('/projects');
+    } catch (error) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(error.toString()),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    } finally {
+      if (mounted) {
+        setState(() => _saving = false);
+      }
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -309,6 +365,22 @@ class _CreateProjectScreenState extends State<CreateProjectScreen> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                   ),
                 ),
+                if (isEditing) ...[
+                  const SizedBox(height: 12),
+                  OutlinedButton.icon(
+                    onPressed: _saving ? null : _deleteProject,
+                    icon: const Icon(Icons.delete_outline_rounded, color: Colors.red),
+                    label: const Text(
+                      'Delete project',
+                      style: TextStyle(color: Colors.red, fontWeight: FontWeight.w700),
+                    ),
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      side: const BorderSide(color: Colors.red),
+                    ),
+                  ),
+                ],
                 const SizedBox(height: 8),
               ],
             ),

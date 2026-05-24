@@ -20,6 +20,58 @@ class ProjectDetailScreen extends StatefulWidget {
 class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
   bool _blindMode = true;
 
+  Future<void> _confirmDeleteProject(CreativeProject project) async {
+    final shouldDelete = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Delete project?'),
+        content: Text(
+          'This will permanently remove "${project.title}" from your projects.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: const Text('Cancel'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            style: FilledButton.styleFrom(backgroundColor: Colors.red),
+            child: const Text('Delete'),
+          ),
+        ],
+      ),
+    );
+
+    if (shouldDelete != true) {
+      return;
+    }
+
+    final controller = context.read<AppController>();
+    try {
+      await controller.deleteProject(project.projectId);
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Project deleted'),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      if (context.canPop()) {
+        context.pop();
+      } else {
+        context.go('/projects');
+      }
+    } catch (error) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(error.toString()),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final controller = context.watch<AppController>();
@@ -38,10 +90,28 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
         title: const Text('Project details'),
         actions: [
           if (isOwner)
-            IconButton(
-              icon: const Icon(Icons.edit_rounded),
-              tooltip: 'Edit project',
-              onPressed: () => context.push('/projects/${project.projectId}/edit'),
+            PopupMenuButton<String>(
+              onSelected: (value) {
+                if (value == 'edit') {
+                  context.push('/projects/${project.projectId}/edit');
+                } else if (value == 'delete') {
+                  _confirmDeleteProject(project);
+                }
+              },
+              itemBuilder: (context) => const [
+                PopupMenuItem(
+                  value: 'edit',
+                  child: Text('Edit project'),
+                ),
+                PopupMenuItem(
+                  value: 'delete',
+                  child: Text(
+                    'Delete project',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
+              ],
+            ),
             ),
         ],
       ),

@@ -167,6 +167,21 @@ SceneLink uses Firebase for authentication, real-time database, and file storage
 6. Enable **Storage**.
 7. Run `flutterfire configure` to regenerate `lib/firebase_options.dart`.
 
+### Firebase API keys
+
+The repository no longer stores Firebase API keys in source control. Provide them at build time with `--dart-define`:
+
+```bash
+flutter run \
+  --dart-define=SCREENLINK_FIREBASE_WEB_API_KEY=... \
+  --dart-define=SCREENLINK_FIREBASE_ANDROID_API_KEY=... \
+  --dart-define=SCREENLINK_FIREBASE_IOS_API_KEY=... \
+  --dart-define=SCREENLINK_FIREBASE_MACOS_API_KEY=... \
+  --dart-define=SCREENLINK_FIREBASE_WINDOWS_API_KEY=...
+```
+
+If a key is omitted, Firebase initialization falls back to the app's mock/offline path on that platform.
+
 ### Firestore collections
 
 | Collection | Description |

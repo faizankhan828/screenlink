@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "557179503430",
+    "project_id": "screenlink-f2484",
+    "storage_bucket": "screenlink-f2484.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557179503430:android:6042793b4fa3f0068fdb47",
+        "android_client_info": {
+          "package_name": "com.example.screenlink"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUaY0JpAxftW9NMq3QWAlQyN_uHZTUgb8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

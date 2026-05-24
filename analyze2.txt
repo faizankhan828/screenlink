@@ -1,0 +1,21 @@
+Analyzing 6 items...                                            
+
+warning - The value of the local variable 'scheme' isn't used - lib\src\screens\feed\feed_screen.dart:77:11 - unused_local_variable
+   info - Unnecessary use of multiple underscores - lib\src\screens\home\home_screen.dart:128:49 - unnecessary_underscores
+   info - Unnecessary use of multiple underscores - lib\src\screens\home\home_screen.dart:353:43 - unnecessary_underscores
+warning - The value of the local variable 'scheme' isn't used - lib\src\screens\home\home_screen.dart:433:11 - unused_local_variable
+warning - The value of the local variable 'scheme' isn't used - lib\src\screens\home\home_screen.dart:627:11 - unused_local_variable
+warning - Unused import: '../../widgets/scene_link_widgets.dart' - lib\src\screens\maps\maps_screen.dart:9:8 - unused_import
+   info - Statements in an if should be enclosed in a block - lib\src\screens\premium\payment_screen.dart:24:18 - curly_braces_in_flow_control_structures
+   info - 'groupValue' is deprecated and shouldn't be used. Use a RadioGroup ancestor to manage group value instead. This feature was deprecated after v3.32.0-0.0.pre - lib\src\screens\premium\payment_screen.dart:241:15 - deprecated_member_use
+   info - 'onChanged' is deprecated and shouldn't be used. Use RadioGroup to handle value change instead. This feature was deprecated after v3.32.0-0.0.pre - lib\src\screens\premium\payment_screen.dart:242:15 - deprecated_member_use
+   info - Unnecessary use of multiple underscores - lib\src\screens\social\friends_screen.dart:189:29 - unnecessary_underscores
+   info - Unnecessary use of multiple underscores - lib\src\widgets\scene_link_widgets.dart:226:26 - unnecessary_underscores
+   info - Unnecessary use of multiple underscores - lib\src\widgets\scene_link_widgets.dart:227:26 - unnecessary_underscores
+   info - Unnecessary use of multiple underscores - lib\src\widgets\scene_link_widgets.dart:227:30 - unnecessary_underscores
+   info - Unnecessary use of multiple underscores - lib\src\widgets\scene_link_widgets.dart:284:24 - unnecessary_underscores
+   info - Unnecessary use of multiple underscores - lib\src\widgets\scene_link_widgets.dart:289:24 - unnecessary_underscores
+   info - Unnecessary use of multiple underscores - lib\src\widgets\scene_link_widgets.dart:289:28 - unnecessary_underscores
+   info - Unnecessary use of multiple underscores - lib\src\widgets\scene_link_widgets.dart:344:20 - unnecessary_underscores
+
+17 issues found. (ran in 15.7s)
